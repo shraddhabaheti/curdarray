@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+    <script>
+        let arr = [];
+        const addSubmit = () => {
+            // e.preventDefault();
+            let name = document.getElementById('name').value;
+            let classname = document.getElementById('class').value;
+            let age = document.getElementById('age').value;
+            let address = document.getElementById('address').value;
+            let city = document.getElementById('city').value;
+            let id = 0;
+            if (arr.length === 0) {
+                id = 1
+                arr.push({ id: 1, name: name, class: classname, age: age, address: address, city: city });
+            } else {
+                id = arr.length + 1
+                arr.push({ id: id, name: name, class: classname, age: age, address: address, city: city });
+            }
+            // console.log(arr)
+            let table = document.getElementById('table');
+            const tr = document.createElement('tr');
+            const content = `<td>${name}</td>
+                             <td>${classname}</td>
+                             <td>${age}</td>
+                             <td>${address}</td>
+                             <td>${city}</td>
+                             <td>
+                                <button type="button" onclick=funDel(${id})>Delete</button>
+                                <button type="button" onclick=funEdit(${id})>Edit</button>
+                             </td>`;
+            tr.innerHTML = content;
+            table.appendChild(tr);
+        }
+        const funDel = (id) => {
+            let did = arr.filter((cval) => {
+                return cval.id !== id;
+              
+            })
+
+            
+            console.log(arr);
+            let table = document.getElementById('table');
+            table.deleteRow()
+        }
+        
+         
+    </script>
+    <div>
+        <form>
+            Name:-<input type="text" name="name" value="" id="name" required><br><br>
+            Class:-<input type="text" name="class" value="" id="class" required><br><br>
+            Age:-<input type="text" name="age" value="" id="age" required><br><br>
+            Address:-<input type="text" name="address" value="" id="address" required> <br> <br>
+            City:-<input type="text" name="city" value="" id="city" required><br><br>
+            <button type="button" onclick="addSubmit()">Add</button>
+        </form>
+    </div><br>
+    <table border="1" id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>class</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>City</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="myrow">
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
